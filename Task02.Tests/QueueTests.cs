@@ -12,19 +12,19 @@ namespace Task02.Tests
         [TestCase(2)]
         public void QueueTest(int expected)
         {
-            Queue<int> set = new Queue<int>();
+            Queue<int> queue = new Queue<int>();
             int result = 0;
             for (int i = 5; i < 14; i++)
             {
-                set.Enqueue(i);
+                queue.Enqueue(i);
             }
-            set.Clear();
+            queue.Clear();
             for (int i = 2; i < 8; i++)
             {
-                set.Enqueue(i);
+                queue.Enqueue(i);
             }
-            if (set.Contains(7))
-                result = set.Dequeue();
+            if (queue.Contains(7))
+                result = queue.Dequeue();
 
             Assert.AreEqual(expected, result);
         }
