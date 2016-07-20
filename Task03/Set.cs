@@ -140,12 +140,12 @@ namespace Task03
         /// <param name="item">Items are added into a plurality.</param>
         public void Add(T item)
         {
-            bool elemExist = false;
             foreach (T elem in array)
             {
                 if (item.Equals(elem))
                     throw new ArgumentException("Element exists!");
             }
+
             Array.Resize(ref array, array.Length + 1);
             array[array.Length - 1] = item;
         }
