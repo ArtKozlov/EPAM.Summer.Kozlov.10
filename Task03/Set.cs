@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Task03
 {
-    public class Set<T> : IEquatable<Set<T>>, IEnumerable<T>
+    public class Set<T> : IEquatable<Set<T>>, IEnumerable<T> where T : class
     {
         private T[] array;
         public int Count => array.Length;
