@@ -46,7 +46,7 @@ namespace Task02
         /// <filterpriority>1</filterpriority>
         public IEnumerator<T> GetEnumerator()
         {
-            return new Enumerator(this);
+            return new Enumerator<T>(this);
         }
 
         /// <summary>Returns an enumerator that iterates through a collection.</summary>
@@ -57,51 +57,8 @@ namespace Task02
             return GetEnumerator();
         }
 
-        private T this[int index] => array[index];
+        internal T this[int index] => array[index];
 
-        public struct Enumerator : IEnumerator<T>
-        {
-            private readonly Queue<T> queue;
-            private int index;
-
-            public Enumerator(Queue<T> collection)
-            {
-                queue = collection;
-                index = -1;
-            }
-
-            public T Current
-            {
-                get
-                {
-                    if (index == -1 || index == queue.Count)
-                    {
-                        throw new InvalidOperationException();
-                    }
-                    return queue[index];
-                }
-            }
-            public bool MoveNext()
-            {
-                index++;
-                return index < queue.Count;
-            }
-
-            object System.Collections.IEnumerator.Current
-            {
-                get { throw new NotImplementedException(); }
-            }
-
-            public void Reset()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Dispose()
-            {
-                throw new NotImplementedException();
-            }
-        }
         #endregion
 
         #region override object methods and operators.

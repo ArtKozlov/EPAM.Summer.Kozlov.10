@@ -224,7 +224,7 @@ namespace Task03
         /// <returns>Returns a new object of type of set.</returns>
         public Set<T> UnionOfSets(Set<T> otherSet)
         {
-            bool checkArray = true;
+
             T[] tempArray = new T[array.Length];
             array.CopyTo(tempArray, 0);
             foreach (var elem in otherSet)
@@ -247,7 +247,7 @@ namespace Task03
         /// <returns>Returns a new object of type of set.</returns>
         public Set<T> DifferenceOfSets(Set<T> otherSet)
         {
-            T[] tempArray = new T[0];
+            var tempArray = new T[0];
 
             foreach (var elem in otherSet)
             {
