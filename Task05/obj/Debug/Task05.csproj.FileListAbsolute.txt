@@ -1,0 +1,7 @@
+D:\Epam\EPAM.Summer.Kozlov.10\Task05\bin\Debug\Task05.dll
+D:\Epam\EPAM.Summer.Kozlov.10\Task05\bin\Debug\Task05.pdb
+D:\Epam\EPAM.Summer.Kozlov.10\Task05\bin\Debug\MathNet.Numerics.dll
+D:\Epam\EPAM.Summer.Kozlov.10\Task05\bin\Debug\MathNet.Numerics.xml
+D:\Epam\EPAM.Summer.Kozlov.10\Task05\obj\Debug\Task05.csprojResolveAssemblyReference.cache
+D:\Epam\EPAM.Summer.Kozlov.10\Task05\obj\Debug\Task05.dll
+D:\Epam\EPAM.Summer.Kozlov.10\Task05\obj\Debug\Task05.pdb
