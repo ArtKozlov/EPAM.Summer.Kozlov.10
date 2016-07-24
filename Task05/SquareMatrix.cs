@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace Task05
 {
-    public class SquareMatrix<T> : IEnumerable<T>
+    public class SquareMatrix<T> : IEnumerable<T> where T : struct, IEquatable<T>, IFormattable
     {
         public event EventHandler<ChangeElemEventArgs<T>> ChangeElem = delegate { };
         public T[,] Matrix { get; protected set; }
@@ -129,16 +130,20 @@ namespace Task05
             Console.Beep(e.I*100, e.J*1000);
             ChangeElem(sender, e);
         }
-        /*
-        protected virtual SquareMatrix<T> Add(SquareMatrix<T> other)
+        
+        public virtual SquareMatrix<T> Add(SquareMatrix<T> other)
         {
             if(Size != other.Size)
                 throw new ArgumentException();
             T[,] newMatrix = Matrix;
             for (int i = 0; i < Matrix.Length; i++)
-                for (int j = i; j < Matrix.Length; j++)
-                    newMatrix[i, j] = Matrix[i, j] + Matrix[i,j]; Нельзя сложить T и T. 
+                for (int j = 0; j < Matrix.Length; j++)
+                    newMatrix[i, j] = other[i,j];
+            Matrix<T> lhs = Matrix<T>.Build.DenseOfArray(newMatrix);
+            Matrix<T> rhs = Matrix<T>.Build.DenseOfArray(Matrix);
+            newMatrix = lhs.Add(rhs).ToArray();
+            return new SquareMatrix<T>(newMatrix);
         }
-        */
+        
     }
 }

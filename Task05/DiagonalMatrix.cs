@@ -9,7 +9,7 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace Task05
 {
-    public class DiagonalMatrix<T> : SquareMatrix<T>
+    public class DiagonalMatrix<T> : SquareMatrix<T> where T : struct, IEquatable<T>, IFormattable
     {
 
         /// <summary>
