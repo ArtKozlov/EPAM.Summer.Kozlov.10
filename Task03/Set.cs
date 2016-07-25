@@ -180,13 +180,8 @@ namespace Task03
         /// <returns>Returns true if the element is present in a plurality, and false if the element is not present in the set.</returns>
         public bool Contains(T element)
         {
-            foreach (T elem in array)
-            {
-                if (element.Equals(elem))
-                {
-                    return true;
-                }
-            }
+            if (array.Contains(element))
+                return true;
 
             return false;
         }

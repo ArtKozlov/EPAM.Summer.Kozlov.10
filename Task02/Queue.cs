@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Task02
 {
-    public class Queue<T>: IEquatable<Queue<T>>, IEnumerable<T>
+    public class Queue<T>: IEnumerable<T>
     {
         private T[] array;
         public int Count => array.Length;
@@ -22,24 +22,7 @@ namespace Task02
             InitArray(otherQueue);
         }
 
-        #region implementation interfaces
-
-        /// <summary>Indicates whether the current object is equal to another object of the queue type.</summary>
-        /// <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
-        /// <param name="other">An object to compare with this object.</param>
-        public bool Equals(Queue<T> other)
-        {
-            if (ReferenceEquals(null, other) || other.Count != Count)
-                return false;
-
-
-            for (int i = 0; i < Count; i++)
-            {
-                if (!array[i].Equals(other[i])) { return false; }
-            }
-
-            return true;
-        }
+        #region implementation interface
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
@@ -62,21 +45,6 @@ namespace Task02
         #endregion
 
         #region override object methods and operators.
-        /// <summary>Determines whether the specified object is equal to the queue.</summary>
-        /// <returns>true if the specified object  is equal to the queue; otherwise, false.</returns>
-        /// <param name="obj">The object to compare with the queue.</param>
-        /// <filterpriority>2</filterpriority>
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-                return false;
-            Queue<T> set = obj as Queue<T>;
-            if (ReferenceEquals(null, set))
-            {
-                return false;
-            }
-            return Equals(set);
-        }
 
         /// <summary>Returns a string that represents the queue.</summary>
         /// <returns>A string that represents the queue.</returns>
@@ -108,19 +76,6 @@ namespace Task02
             return num;
         }
 
-
-
-        public static bool operator ==(Queue<T> lhs, Queue<T> rhs)
-        {
-            if (ReferenceEquals(null, lhs) || ReferenceEquals(null, rhs))
-                return false;
-            return ReferenceEquals(lhs, rhs);
-        }
-
-        public static bool operator !=(Queue<T> lhs, Queue<T> rhs)
-        {
-            return !(lhs == rhs);
-        }
         #endregion
 
         #region functionality
