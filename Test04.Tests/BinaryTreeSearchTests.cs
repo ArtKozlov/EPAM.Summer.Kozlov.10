@@ -22,7 +22,7 @@ namespace Test04.Tests
                     new Book("author", "ttt", 5, 2015), new Book("author", "ttt", 4, 2015),
                     new Book("author", "ttt", 3, 2015),
                     new Book("author", "ttt", 6, 2015), new Book("author", "ttt", 7, 2015)
-                }, null);
+                });
             var expected = new Book[]
             {
                 new Book("author", "ttt", 5, 2015), new Book("author", "ttt", 4, 2015),
@@ -62,7 +62,7 @@ namespace Test04.Tests
                     new Book("author", "ttt", 5, 2015), new Book("author", "ttt", 4, 2015),
                     new Book("author", "ttt", 3, 2015),
                     new Book("author", "ttt", 6, 2015), new Book("author", "ttt", 7, 2015)
-                }, null);
+                });
             var expected = new Book[]
             {
                 new Book("author", "ttt", 5, 2015), new Book("author", "ttt", 4, 2015),
@@ -102,7 +102,7 @@ namespace Test04.Tests
                     new Book("author", "ttt", 5, 2015), new Book("author", "ttt", 4, 2015),
                     new Book("author", "ttt", 3, 2015),
                     new Book("author", "ttt", 6, 2015), new Book("author", "ttt", 7, 2015)
-                }, null);
+                });
             var expected = new Book[]
             {
                 new Book("author", "ttt", 5, 2015), new Book("author", "ttt", 4, 2015),
@@ -142,7 +142,7 @@ namespace Test04.Tests
         {
             var binaryTree =
                 new BinaryTreeSearch<Point>(
-                    new Point[] { new Point(3, 3), new Point(2, 2), new Point(1, 1), new Point(4, 4) }, null);
+                    new Point[] { new Point(3, 3), new Point(2, 2), new Point(1, 1), new Point(4, 4) });
             var expected = new Point[] { new Point(3, 3), new Point(2, 2), new Point(1, 1), new Point(4, 4) };
 
             CollectionAssert.AreEqual(expected, binaryTree.PreOrder());
@@ -153,7 +153,7 @@ namespace Test04.Tests
         {
             var binaryTree =
                 new BinaryTreeSearch<Point>(
-                    new Point[] { new Point(3, 3), new Point(2, 2), new Point(1, 1), new Point(4, 4) }, null);
+                    new Point[] { new Point(3, 3), new Point(2, 2), new Point(1, 1), new Point(4, 4) });
             var expected = new Point[] { new Point(1, 1), new Point(2, 2), new Point(4, 4), new Point(3, 3) };
 
             CollectionAssert.AreEqual(expected, binaryTree.PostOrder());
@@ -178,7 +178,7 @@ namespace Test04.Tests
         [Test]
         public void BinaryTreeSearchPreOrderWithIntComparer()
         {
-            var binaryTree = new BinaryTreeSearch<int>(new int[] {5, 2, 8, 1, 3, 4, 7, 9, 6}, null);
+            var binaryTree = new BinaryTreeSearch<int>(new int[] {5, 2, 8, 1, 3, 4, 7, 9, 6});
             var expected = new int[] {5, 2, 1, 3, 4, 8, 7, 6, 9};
 
             CollectionAssert.AreEqual(expected, binaryTree.PreOrder());
@@ -188,7 +188,7 @@ namespace Test04.Tests
         [Test]
         public void BinaryTreeSearchPostOrderWithIntComparer()
         {
-            var binaryTree = new BinaryTreeSearch<int>(new int[] {5, 2, 8, 1, 3, 4, 7, 9, 6}, null);
+            var binaryTree = new BinaryTreeSearch<int>(new int[] {5, 2, 8, 1, 3, 4, 7, 9, 6});
             var expected = new int[] {1, 4, 3, 2, 6, 7, 9, 8, 5};
 
             CollectionAssert.AreEqual(expected, binaryTree.PostOrder());
@@ -197,7 +197,7 @@ namespace Test04.Tests
         [Test]
         public void BinaryTreeSearchInOrderWithIntComparer()
         {
-            var binaryTree = new BinaryTreeSearch<int>(new int[] {6, 5, 4, 3, 2, 1, 10, 9, 8, 7}, null);
+            var binaryTree = new BinaryTreeSearch<int>(new int[] {6, 5, 4, 3, 2, 1, 10, 9, 8, 7});
             var expected = new int[] {6, 5, 10, 4, 9, 3, 8, 2, 7, 1};
 
             CollectionAssert.AreEqual(expected, binaryTree.InOrder());
@@ -211,7 +211,7 @@ namespace Test04.Tests
         [Test]
         public void BinaryTreeSearchPreOrderWithStringComparer()
         {
-            var binaryTree = new BinaryTreeSearch<string>(new string[] {"aaa", "bbb", "ccc", "ddd"}, null);
+            var binaryTree = new BinaryTreeSearch<string>(new string[] {"aaa", "bbb", "ccc", "ddd"});
             var expected = new string[] {"aaa", "bbb", "ccc", "ddd"};
 
             CollectionAssert.AreEqual(expected, binaryTree.PreOrder());
@@ -220,7 +220,7 @@ namespace Test04.Tests
         [Test]
         public void BinaryTreeSearchPostOrderWithStringComparer()
         {
-            var binaryTree = new BinaryTreeSearch<string>(new string[] {"aaa", "bbb", "ccc", "ddd"}, null);
+            var binaryTree = new BinaryTreeSearch<string>(new string[] {"aaa", "bbb", "ccc", "ddd"});
             var expected = new string[] {"ddd", "ccc", "bbb", "aaa"};
 
             CollectionAssert.AreEqual(expected, binaryTree.PostOrder());
@@ -229,7 +229,7 @@ namespace Test04.Tests
         [Test]
         public void BinaryTreeSearchInOrderWithStringComparer()
         {
-            var binaryTree = new BinaryTreeSearch<string>(new string[] {"bbb", "ccc", "ddd", "aaa", "zzz"}, null);
+            var binaryTree = new BinaryTreeSearch<string>(new string[] {"bbb", "ccc", "ddd", "aaa", "zzz"});
             var expected = new string[] {"bbb", "aaa", "ccc", "ddd", "zzz"};
 
             CollectionAssert.AreEqual(expected, binaryTree.InOrder());

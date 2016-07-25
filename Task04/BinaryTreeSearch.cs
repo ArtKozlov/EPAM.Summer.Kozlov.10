@@ -8,7 +8,7 @@ namespace Task04
     {
 #region Fields and constructor
         private Node _root;
-        private IComparer<T> _comparer;
+        private readonly IComparer<T> _comparer;
 
         /// <summary>
         /// The constructor takes as parameters the collection of items and a comparator.
@@ -35,9 +35,21 @@ namespace Task04
                 Add(elem);
             }
         }
-#endregion
 
-#region implement interfaces
+        /// <summary>
+        /// The constructor takes as parameters the collection of items.
+        /// The value of the comparator can be passed null. 
+        /// Then it will be used by default comparator.
+        /// </summary>
+        /// <param name="collection">collection of items.</param>
+        public BinaryTreeSearch(IEnumerable<T> collection) : this(collection, null)
+        {
+        }
+
+        public BinaryTreeSearch(){ }
+        #endregion
+
+        #region implement interfaces
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
@@ -58,7 +70,7 @@ namespace Task04
         /// <summary>
         /// Method added element in binary tree.
         /// </summary>
-        /// <param name="elem">it's the leave which will add.</param>
+        /// <param name="elem">it's the leave which will be add.</param>
         public void Add(T elem)
         {
 
@@ -89,6 +101,47 @@ namespace Task04
                 dadyRoot.Right = new Node(elem);
 
         }
+
+        /// <summary>
+        /// Method find element in binary tree.
+        /// </summary>
+        /// <param name="elem">it's the leave which will be find.</param>
+        public bool Contains(T elem)
+        {
+
+            if (ReferenceEquals(null, elem))
+                throw new ArgumentNullException();
+            if (ReferenceEquals(null, _root))
+            {
+                _root = new Node(elem);
+                return false;
+            }
+            Node currentRoot = _root;
+            Node dadyRoot = null;
+
+            while (!ReferenceEquals(null, currentRoot))
+            {
+                if (_comparer.Compare(currentRoot.Value, elem) == 0)
+                    return true;
+                dadyRoot = currentRoot;
+                if (_comparer.Compare(currentRoot.Value, elem) < 0)
+                    currentRoot = currentRoot.Right;
+                else
+                    currentRoot = currentRoot.Left;
+            }
+            return false;
+
+        }
+
+        /// <summary>
+        /// Method clear binary tree.
+        /// </summary>
+        public void Clear()
+        {
+            _root = null;
+
+        }
+
         /// <summary>
         /// Performs direct traversal of the tree.
         /// </summary>
@@ -111,7 +164,7 @@ namespace Task04
         /// Performs a symmetrical tree traversal.
         /// </summary>
         /// <returns>elements tree of IEnumerable type.</returns>
-        public IEnumerable<T> InOrder()
+        public IEnumerable<T> InOrder() 
         {
             Queue<Node> queue = new Queue<Node>();
             queue.Enqueue(_root);

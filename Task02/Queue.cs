@@ -21,13 +21,9 @@ namespace Task02
 
             InitArray(otherQueue);
         }
-
-<<<<<<< HEAD
+        
         #region implementation interface
-=======
-        #region implementation interfaces
 
->>>>>>> origin/master
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
@@ -49,11 +45,7 @@ namespace Task02
 
         #endregion
 
-        #region override object methods and operators.
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
+        #region override object methods and operators
         /// <summary>Returns a string that represents the queue.</summary>
         /// <returns>A string that represents the queue.</returns>
         /// <filterpriority>2</filterpriority>
@@ -83,11 +75,6 @@ namespace Task02
 
             return num;
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> origin/master
         #endregion
 
         #region functionality
