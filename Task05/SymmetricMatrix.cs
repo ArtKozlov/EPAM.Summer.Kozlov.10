@@ -49,7 +49,7 @@ namespace Task05
         protected bool IsSymmetric(T[,] matrix)
         {
             for (int i = 0; i < matrix.Length; i++)
-                for (int j = i; j < matrix.Length; j++)
+                for (int j = 0; j < matrix.Length; j++)
                     if (i != j && !matrix[i, j].Equals(matrix[j, i]))
                         return false;
 
