@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using NUnit.Framework;
 
 namespace Task05.Tests
@@ -18,7 +14,7 @@ namespace Task05.Tests
             var squareMatrix2 =
                 new SquareMatrix<int>(new int[,] { { 1, 1, 1 }, { 2, 2, 2 }, { 3, 3, 3 } });
 
-            SquareMatrix<int> newMatrix = squareMatrix.Add(squareMatrix2);
+            var newMatrix = AddHelper<SquareMatrix<int>>.Add(squareMatrix2, squareMatrix);
             var expectedMatrix = new int[,] { { 1, 1, 1 }, { 2, 2, 2 }, { 3, 3, 3 } };
             CollectionAssert.AreEqual(newMatrix.Matrix, expectedMatrix);
         }
@@ -35,7 +31,7 @@ namespace Task05.Tests
             var diagonalMatrix2 =
                 new DiagonalMatrix<int>(new int[,] { { 9, 0, 0 }, { 0, 6, 0 }, { 0, 0, 4 } });
 
-            DiagonalMatrix<int> newMatrix = (DiagonalMatrix<int>)diagonalMatrix.Add(diagonalMatrix2);
+            var newMatrix = AddHelper<DiagonalMatrix<int>>.Add(diagonalMatrix, diagonalMatrix2);
             var expectedMatrix = new int[,] { { 12, 0, 0 }, { 0, 11, 0 }, { 0, 0, 6 } };
 
             CollectionAssert.AreEqual(newMatrix.Matrix, expectedMatrix);
@@ -52,7 +48,7 @@ namespace Task05.Tests
             var symmetricMatrix2 =
                 new SymmetricMatrix<int>(new int[,] { { 1, 2, 3 }, { 2, 3, 4 }, { 3, 4, 5 } });
 
-            var newMatrix = (SymmetricMatrix<int>)symmetricMatrix.Add(symmetricMatrix2);
+            var newMatrix = AddHelper<SymmetricMatrix<int>>.Add(symmetricMatrix, symmetricMatrix2);
             var expectedMatrix = new int[,] { { 2, 4, 5 }, { 4, 6, 8 }, { 6, 8, 10 } };
 
             CollectionAssert.AreEqual(newMatrix.Matrix, expectedMatrix);

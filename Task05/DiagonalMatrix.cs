@@ -9,15 +9,14 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace Task05
 {
-    public class DiagonalMatrix<T> : SquareMatrix<T> where T : struct, IEquatable<T>, IFormattable
+    public class DiagonalMatrix<T> : AbstractMatrix<T>
     {
-
         /// <summary>
         /// Constructor takes as arguments a two-dimensional array.
         ///  The length should be a square number.
         /// </summary>
         /// <param name="matrix">a two-dimensional array.</param>
-        public DiagonalMatrix(T[,] matrix) : base(matrix)
+        public DiagonalMatrix(T[,] matrix)
         {
             if (ReferenceEquals(matrix, null))
                 throw new ArgumentNullException(nameof(matrix));
@@ -28,22 +27,13 @@ namespace Task05
 
             Matrix = matrix;
         }
-        public override T this[int i, int j]
-        {
-            get
-            {
-                if (i < 0 || i >= Matrix.Length || j < 0 || j >= Matrix.Length)
-                    throw new ArgumentOutOfRangeException();
-                return Matrix[i, j];
-            }
-            set
-            {
-                if (i < 0 || i >= Matrix.Length || j < 0 || j >= Matrix.Length)
-                    throw new ArgumentOutOfRangeException();
-                Matrix[i, j] = value;
 
-                OnChangeElem(this, new ChangeElemEventArgs<T>(i, j, value));
-            }
+        protected override T GetValue(int i, int j) => i == j ? Matrix[i,j] : default(T);
+
+        protected override void SetValue(int i, int j, T value)
+        {
+            if (i == j) Matrix[i,j] = value;
+            throw new ArgumentException("We try to set value on non-diagonal line");
         }
 
         protected bool IsDiagonal(T[,] matrix)

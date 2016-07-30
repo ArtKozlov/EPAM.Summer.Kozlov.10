@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
 
 namespace Task05
 {
-    public class SymmetricMatrix<T> : SquareMatrix<T> where T : struct, IEquatable<T>, IFormattable
+    public class SymmetricMatrix<T> : AbstractMatrix<T>
     {
-
         /// <summary>
         /// Constructor takes as arguments a two-dimensional array.
         ///  The length should be a square number.
         /// </summary>
         /// <param name="matrix">a two-dimensional array.</param>
-        public SymmetricMatrix(T[,] matrix) : base(matrix)
+        public SymmetricMatrix(T[,] matrix)
         {
             if (ReferenceEquals(matrix, null))
                 throw new ArgumentNullException(nameof(matrix));
@@ -27,25 +19,14 @@ namespace Task05
                 throw new ArgumentException(nameof(matrix));
             Matrix = matrix;
         }
+        protected override T GetValue(int i, int j) => i >= j ? Matrix[i,j] : Matrix[j,i];
 
-        public override T this[int i, int j]
+        protected override void SetValue(int i, int j, T value)
         {
-            get
-            {
-                if (i < 0 || i >= Matrix.Length || j < 0 || j >= Matrix.Length)
-                    throw new ArgumentOutOfRangeException();
-                return Matrix[i, j];
-            }
-            set
-            {
-                if (i < 0 || i >= Matrix.Length || j < 0 || j >= Matrix.Length)
-                    throw new ArgumentOutOfRangeException();
-                Matrix[i, j] = value;
-
-                OnChangeElem(this, new ChangeElemEventArgs<T>(i, j, value));
-
-            }
+            if (i >= j) Matrix[i,j] = value;
+            else Matrix[j,i] = value;
         }
+
         protected bool IsSymmetric(T[,] matrix)
         {
             for (int i = 0; i < matrix.Length; i++)

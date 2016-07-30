@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractMatrix.cs" />
     <Compile Include="ChangeElemEventArgs.cs" />
+    <Compile Include="ComputeMatrixSumVisitor.cs" />
     <Compile Include="DiagonalMatrix.cs" />
+    <Compile Include="IMatrixVisitor.cs" />
     <Compile Include="SquareMatrix.cs" />
     <Compile Include="SymmetricMatrix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

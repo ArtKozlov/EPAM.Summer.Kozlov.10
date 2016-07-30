@@ -1,21 +1,9 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace Task05
 {
-    public class SquareMatrix<T> : IEnumerable<T> where T : struct, IEquatable<T>, IFormattable
+    public class SquareMatrix<T>: AbstractMatrix<T>
     {
-        public event EventHandler<ChangeElemEventArgs<T>> ChangeElem = delegate { };
-        public T[,] Matrix { get; protected set; }
-        public int Size => Matrix.Length;
 
         /// <summary>
         /// Constructor takes as arguments a two-dimensional array.
@@ -31,7 +19,19 @@ namespace Task05
             Matrix = matrix;
         }
 
+        public SquareMatrix(int size)
+        {
+            if (size <= 0)
+                throw new ArgumentOutOfRangeException(nameof(size));
+            Size = size;
+            Matrix = new T[Size, Size];
+            for (int i = 0; i < Size; i++)
+            {
+                for (int j = 0; j < Size; j++)
+                    Matrix[i, j] = default(T);
+            }
 
+        }
         /// <summary>
         /// Determines whether the specified square matrix is equal to the current square matrix.
         /// </summary>
@@ -64,13 +64,7 @@ namespace Task05
 
 
 
-        protected bool IsSquare(T[,] matrix)
-        {
-            double dimension = Math.Sqrt(matrix.Length) - Convert.ToInt32(Math.Sqrt(matrix.Length));
-            if (dimension > 0)
-                return false;
-            return true;
-        }
+
 
         #region implementing interface and override object methods
         /// <summary>Determines whether the specified object is equal to the current object.</summary>
@@ -95,25 +89,6 @@ namespace Task05
             return Matrix.GetHashCode();
         }
 
-        /// <summary>Returns an enumerator that iterates through a collection.</summary>
-        /// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
-        /// <filterpriority>2</filterpriority>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        /// <filterpriority>1</filterpriority>
-        public IEnumerator<T> GetEnumerator()
-        {
-            foreach (var elem in Matrix)
-            {
-                yield return elem;
-            }
-        }
-
 
         /// <summary>Returns a string that represents the current object.</summary>
         /// <returns>A string that represents the current object.</returns>
@@ -122,28 +97,15 @@ namespace Task05
         {
             return Matrix.ToString();
         }
+
+        protected override T GetValue(int i, int j) => Matrix[i, j];
+
+        protected override void SetValue(int i, int j, T value)
+        {
+            Matrix[i, j] = value;
+        }
+
         #endregion
 
-        protected virtual void OnChangeElem(object sender, ChangeElemEventArgs<T> e)
-        {
-            ChangeElem?.Invoke(this, e);
-            Console.Beep(e.I*100, e.J*1000);
-            ChangeElem(sender, e);
-        }
-        
-        public virtual SquareMatrix<T> Add(SquareMatrix<T> other)
-        {
-            if(Size != other.Size)
-                throw new ArgumentException();
-            T[,] newMatrix = Matrix;
-            for (int i = 0; i < Matrix.Length; i++)
-                for (int j = 0; j < Matrix.Length; j++)
-                    newMatrix[i, j] = other[i,j];
-            Matrix<T> lhs = Matrix<T>.Build.DenseOfArray(newMatrix);
-            Matrix<T> rhs = Matrix<T>.Build.DenseOfArray(Matrix);
-            newMatrix = lhs.Add(rhs).ToArray();
-            return new SquareMatrix<T>(newMatrix);
-        }
-        
     }
 }

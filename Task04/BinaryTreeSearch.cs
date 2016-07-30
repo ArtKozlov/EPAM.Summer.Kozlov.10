@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Task04
 {
-    public class BinaryTreeSearch<T> : IEnumerable<T>
+    public sealed class BinaryTreeSearch<T> : IEnumerable<T>
     {
 #region Fields and constructor
         private Node _root;
@@ -66,7 +66,17 @@ namespace Task04
         }
         #endregion
 
-#region Methods
+        #region Methods
+        /// <summary>Adds an items to the <see cref="BinaryTree{T}"/></summary>
+        /// <param name="collection">The collection to add to the <see cref="BinaryTree{T}"/></param>
+        public void AddRange(IEnumerable<T> collection)
+        {
+            foreach (var value in collection)
+            {
+                Add(value);
+            }
+        }
+
         /// <summary>
         /// Method added element in binary tree.
         /// </summary>
@@ -146,40 +156,19 @@ namespace Task04
         /// Performs direct traversal of the tree.
         /// </summary>
         /// <returns>elements tree of IEnumerable type.</returns>
-        public IEnumerable<T> PreOrder()
-        {
-            return PreOrder(_root);
-        }
+        public IEnumerable<T> PreOrder() => PreOrder(_root);
 
         /// <summary>
         /// Performs reverse traversal of the tree.
         /// </summary>
         /// <returns>elements tree of IEnumerable type.</returns>
-        public IEnumerable<T> PostOrder()
-        {
-            return PostOrder(_root);
-        }
+        public IEnumerable<T> PostOrder() => PostOrder(_root);
 
         /// <summary>
         /// Performs a symmetrical tree traversal.
         /// </summary>
         /// <returns>elements tree of IEnumerable type.</returns>
-        public IEnumerable<T> InOrder() 
-        {
-            Queue<Node> queue = new Queue<Node>();
-            queue.Enqueue(_root);
-            while (queue.Count != 0)
-            {
-                Node node = queue.Dequeue();
-                if (!ReferenceEquals(null, node))
-                {
-                    queue.Enqueue(node.Left);
-                    queue.Enqueue(node.Right);
-                    yield return node.Value;
-                }
-            }
-      
-        }
+        public IEnumerable<T> InOrder() => InOrder(_root);
         #endregion
 
 #region private components
@@ -226,6 +215,17 @@ namespace Task04
 
             foreach (var e in PreOrder(node.Right))
                 yield return e;
+        }
+
+        private IEnumerable<T> InOrder(Node node)
+        {
+            if (node == null) yield break;
+            foreach (var n in InOrder(node.Left))
+                yield return n;
+
+            yield return node.Value;
+            foreach (var n in InOrder(node.Right))
+                yield return n;
         }
         #endregion
     }
